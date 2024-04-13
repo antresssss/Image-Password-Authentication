@@ -17,10 +17,8 @@ def display_images():
     # Create the main Tkinter window
     root = tk.Tk()
     root.title("Image Password Authentication")
-
-    # Get the path to the Downloads directory
-    #or create a folder assests and place the images there,relative paths
-    downloads_dir = os.path.expanduser("~/Downloads")
+    current_dir =os.path.dirname(__file__);
+    assetsipa_dir=os.path.join(current_dir,"assetsipa");
 
     # Specify the file names of images
     file_names = ["images.jpeg", "Isaiah 60 22 (copy).jpeg", "image2.jpeg", "image3.jpg","todo.jpg"]
@@ -36,7 +34,7 @@ def display_images():
     # Create a grid to display images with checkboxes
     for i, file_name in enumerate(file_names):
         # Construct the full path to the image file
-        image_path = os.path.join(downloads_dir, file_name)
+        image_path = os.path.join(assetsipa_dir, file_name)
 
         # Open the image file
         image = Image.open(image_path)
