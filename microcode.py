@@ -7,14 +7,14 @@ def toggle_selection(image_index):
     selected_images[image_index] = not selected_images[image_index]
 
 def submit(password_entry, auth_label):
-    # Checking if the correct images are selected and if the password is correct
-    if (all(selected_images[i] for i in [0,3,6,7,8])  and password_entry.get() == "password"):
+    # Check if the first and last images are selected and if the password is correct
+    if all(selected_images[i] for i in [0, 3, 7]) and password_entry.get() == "password":
         auth_label.config(text="User Authenticated! yay !")
     else:
         auth_label.config(text="Incorrect Password or Images not selected TT ")
 
 def display_images():
-    # Creating the main Tkinter window
+    # Create the main Tkinter window
     root = tk.Tk()
     root.title("Image Password Authentication")
     
@@ -55,7 +55,7 @@ def display_images():
         label.grid(row=i // 3 * 2, column=i % 3, padx=5, pady=5, sticky="nsew")
 
         # Create a checkbox for the image below it
-        checkbox = tk.Checkbutton(image_frame, command=lambda i=i: toggle_selection(i), bg="black")
+        checkbox = tk.Checkbutton(image_frame, command=lambda i=i: toggle_selection(i), bg="black", highlightbackground="black", highlightcolor="black", activebackground="black")
         checkbox.grid(row=i // 3 * 2 + 1, column=i % 3, sticky="nw")  
 
     # Create a frame for the text box, button, and authentication label
