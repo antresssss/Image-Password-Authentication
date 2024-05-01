@@ -12,7 +12,7 @@ def toggle_selection(image_index):
 
 def submit(password_entry, auth_label):
     # Retrieve the stored hashed password (for demonstration purposes, it's hardcoded here)
-    stored_hashed_password = "$argon2id$v=19$m=10240,t=10,p=8$7jO29SodBqH0uNiqMjGK7w$AjHJFGFtXTjNsb0vG9vy8w"
+    stored_hashed_password = "$argon2id$v=19$m=65536,t=3,p=4$jvnlqqsgazAhL4W7SdZNOg$HOIYUCpQGaPYf2rb69qedGyyTp/2s6pN4m0DZc3G/sI"
     
     # Hash the entered password using Argon2
     entered_password = password_entry.get()
