@@ -1,16 +1,26 @@
 import os
 import tkinter as tk
 from PIL import Image, ImageTk
+from argon2 import PasswordHasher
+
+# Initialize the Argon2 password hasher
+ph = PasswordHasher()
 
 def toggle_selection(image_index):
     # Toggle the selection status of the image at the specified index
     selected_images[image_index] = not selected_images[image_index]
 
 def submit(password_entry, auth_label):
-    # Check if the first and last images are selected and if the password is correct
-    if all(selected_images[i] for i in [0, 3, 7]) and password_entry.get() == "password":
-        auth_label.config(text="User Authenticated! yay !")
-    else:
+    # Retrieve the stored hashed password (for demonstration purposes, it's hardcoded here)
+    stored_hashed_password = "$argon2id$v=19$m=10240,t=10,p=8$7jO29SodBqH0uNiqMjGK7w$AjHJFGFtXTjNsb0vG9vy8w"
+    
+    # Hash the entered password using Argon2
+    entered_password = password_entry.get()
+    try:
+        # Verify the entered password against the stored hashed password
+        ph.verify(stored_hashed_password, entered_password)
+        auth_label.config(text="User Authenticated!")
+    except:
         auth_label.config(text="Incorrect Password or Images not selected TT ")
 
 def display_images():
@@ -66,8 +76,8 @@ def display_images():
     password_label = tk.Label(input_frame, text="Enter Password:", bg="black", fg="white")
     password_label.grid(row=0, column=0, pady=(0, 5))
 
-    # Create a text box
-    password_entry = tk.Entry(input_frame, width=30)
+    # Create a text box for password entry
+    password_entry = tk.Entry(input_frame, width=30, show="*")
     password_entry.grid(row=1, column=0, pady=(0, 5))
 
     # Create a button for submitting
